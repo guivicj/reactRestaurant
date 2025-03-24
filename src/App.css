@@ -1,38 +1,418 @@
-.App {
-  text-align: center;
+body {
+    overflow-x: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100vw;
+    color: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("assets/background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -2;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(23, 23, 23, 0.5) 2%,
+    #101010 10%,
+    rgba(0, 0, 0, 1) 92%,
+    rgba(0, 0, 0, 0) 96%,
+    rgba(0, 0, 0, 1) 100%);
+    z-index: -1;
 }
 
-.App-link {
-  color: #61dafb;
+.footer-background {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 900px;
+    background-image: url("assets/footer-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -2;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footer-background {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 800px;
+    background-image: url("assets/footer-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -2;
+}
+
+.header {
+    position: relative;
+    top: 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.logo {
+    width: 100px;
+}
+
+.top-nav-menu {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    font-size: 24px;
+}
+
+.links {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+}
+
+.links:hover {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+}
+
+.black-btn {
+    height: fit-content;
+    color: #f5bd33;
+    background-color: transparent;
+    border: solid 2px #f5bd33;
+    box-shadow: 0 0 8px #f5bd33;
+
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.yellow-btn {
+    height: fit-content;
+    color: #232323;
+    background-color: #f5bd33;
+    box-shadow: 0 0 8px #f5bd33;
+
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.title {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-title {
+    color: #f2d181;
+    text-align: center;
+    font-size: 70px;
+    line-height: 1;
+    margin: 0.1em 0 0.1em 0;
+}
+
+.subtitle {
+    font-size: 30px;
+    font-weight: 100;
+    line-height: 1;
+    margin: 0.1em 0;
+}
+
+.subtitle-info {
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.subtitle-info, .main-title {
+    white-space: pre-line;
+    display: block;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.specials-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.specials-cards > div:nth-child(2) .food-card {
+    background-color: #1e1e1e;
+}
+
+
+.food-card {
+    background-color: #2e2e2e;
+    padding: 20px;
+    margin: -0.3em 0;
+}
+
+.specials-cards > div {
+    box-shadow: 0 0 4px rgba(255, 214, 128, 0.5);
+}
+
+.card-name {
+    color: #f2d181;
+}
+
+.card-description {
+    white-space: pre-line;
+    font-weight: 100;
+}
+
+.stars {
+    margin: 0.1em 0;
+    font-size: 40px;
+    color: #f5bd33;
+}
+
+.menu-container {
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+.menu-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.menu-buttons button {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 20px 25px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.menu-buttons button.active {
+    background-color: #d4af37;
+    color: black;
+    font-weight: 400;
+    border-color: black;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+
+.menu-item.left {
+    flex-direction: row;
+}
+
+.menu-item.right {
+    flex-direction: row-reverse;
+}
+
+.menu-item img {
+    width: 60%;
+    object-fit: cover;
+}
+
+.menu-info {
+    width: 40%;
+    padding: 0 40px 0 40px;
+    text-align: left;
+}
+
+.menu-info h3 {
+    color: #d4af37;
+    font-size: 50px;
+}
+
+.menu-info p {
+    font-size: 30px;
+}
+
+.menu-price {
+    font-size: 50px;
+    font-weight: bold;
+    color: #d4af37;
+}
+
+.events-container {
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+.events-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.events-buttons button {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 20px 25px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.events-buttons button.active {
+    background-color: #d4af37;
+    color: black;
+    font-weight: 400;
+    border-color: black;
+}
+
+.event-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-item {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+
+.event-item.left {
+    flex-direction: row;
+}
+
+.event-item.right {
+    flex-direction: row-reverse;
+}
+
+.event-item img {
+    width: 60%;
+    object-fit: cover;
+}
+
+.event-info {
+    width: 40%;
+    padding: 0 40px 0 40px;
+    text-align: left;
+}
+
+.event-info h3 {
+    color: #d4af37;
+    font-size: 50px;
+}
+
+.event-info p {
+    font-size: 30px;
+}
+
+.event-price {
+    font-size: 50px;
+    font-weight: bold;
+    color: #d4af37;
+}
+
+.about-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+}
+
+.about-us-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.about-us-images {
+    display: flex;
+}
+
+.about-us-info {
+    padding: 10px;
+    text-align: left;
+    font-size: 35px;
+    font-weight: 100;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-info {
+    display: flex;
+    gap: 30px;
+    font-size: 25px;
+    font-weight: 100;
+}
+
+.socials-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    margin-bottom: 50px;
+}
+
+.socials {
+    display: flex;
+    gap: 30px;
+}
+
+.socials a {
+    padding: 5px;
+    border-bottom: solid 1px yellow;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
 }
