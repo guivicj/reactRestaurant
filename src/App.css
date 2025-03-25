@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     overflow-x: hidden;
 }
@@ -84,6 +88,7 @@ body {
     flex-direction: row;
     position: relative;
     font-size: 24px;
+    gap: 20px;
 }
 
 .links {

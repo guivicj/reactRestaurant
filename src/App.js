@@ -41,11 +41,10 @@ function Background() {
 function NavMenu() {
     return (
         <header className="top-nav-menu">
-            <ul><a href="https://google.com" className="links">MENU</a></ul>
-            <ul><a href="https://google.com" className="links">FINE DINING</a></ul>
-            <ul><a href="https://google.com" className="links">ABOUT</a></ul>
-            <ul><a href="https://google.com" className="links">CONTACT</a></ul>
-
+            <a href="#menu" className="links">MENU</a>
+            <a href="#fine-dining" className="links">FINE DINING</a>
+            <a href="#about-us" className="links">ABOUT</a>
+            <a href="#footer-content" className="links">CONTACT</a>
         </header>
     )
 }
@@ -114,7 +113,7 @@ function SpecialsTitle() {
 
 function Specialities() {
     return (
-        <div className="specialities">
+        <div className="specialities" id="menu">
             <SpecialitiesTitle/>
             <RestaurantMenu/>
         </div>
@@ -131,7 +130,7 @@ function SpecialitiesTitle() {
 
 function DiningEvents() {
     return (
-        <div className="events">
+        <div className="events" id="fine-dining">
             <DiningTitle/>
             <EventsMenu/>
         </div>
@@ -147,7 +146,7 @@ function DiningTitle() {
 
 function AboutUs() {
     return (
-        <div className="about-us">
+        <div className="about-us" id="about-us">
             <AboutUsTitle/>
             <AboutUsContent/>
         </div>
@@ -186,7 +185,7 @@ function AboutUsContent() {
 
 function Footer() {
     return (
-        <div className="footer">
+        <div className="footer" id="footer-content">
             <h1 className="main-title">
                 WE READY TO HAVE YOU<br/>
                 THE BEST DINING EXPERIENCES</h1>
