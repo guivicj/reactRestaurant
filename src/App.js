@@ -8,6 +8,7 @@ import separator from './assets/separator.png'
 import about1 from './assets/about-us1.png'
 import about2 from './assets/about-us2.png'
 import about3 from './assets/about-us3.png'
+import Reservation from "./pages/Reservation";
 import BlackButton from "./components/BlackButton";
 import YellowButton from "./components/YellowButton";
 import Spacer from "./components/Spacer"
@@ -15,15 +16,27 @@ import FoodCard from "./components/FoodCard";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Title from "./components/Title";
 import EventsMenu from "./components/EventsMenu";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {useContext, useEffect} from "react";
+import ScrollLink from "./components/ScrollLink";
+import {CartContext} from "./contexts/CartContext";
 
 function App() {
+    const {cart} = useContext(CartContext)
+    const navigate = useNavigate()
 
     return (
         <div className="container">
             <Background/>
             <Header/>
+            <div className="floating-cart" onClick={() => navigate("/cart")}>
+                🛒 {cart.length}
+            </div>
             <Spacer size={128}/>
-            <MainContent/>
+            <Routes>
+                <Route path="/" element={<MainContent/>}/>
+                <Route path="/reserve" element={<Reservation/>}/>
+            </Routes>
         </div>
     );
 }
@@ -39,14 +52,34 @@ function Background() {
 }
 
 function NavMenu() {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleNav = (targetId) => {
+        if (location.pathname === '/reserve') {
+            const confirmExit = window.confirm("Do you really want to exit? Unsaved changes will be lost.");
+            if (!confirmExit) return;
+        }
+
+        if (location.pathname === '/') {
+            const el = document.getElementById(targetId);
+            if (el) {
+                el.scrollIntoView({behavior: 'smooth'});
+            }
+        } else {
+            sessionStorage.setItem('scrollTarget', targetId);
+            navigate('/');
+        }
+    };
+
     return (
         <header className="top-nav-menu">
-            <a href="#menu" className="links">MENU</a>
-            <a href="#fine-dining" className="links">FINE DINING</a>
-            <a href="#about-us" className="links">ABOUT</a>
-            <a href="#footer-content" className="links">CONTACT</a>
+            <ScrollLink className="links" targetId="menu" confirmOnExit>MENU</ScrollLink>
+            <ScrollLink className="links" targetId="fine-dining" confirmOnExit>FINE DINING</ScrollLink>
+            <ScrollLink className="links" targetId="about-us" confirmOnExit>ABOUT</ScrollLink>
+            <ScrollLink className="links" targetId="footer-content" confirmOnExit>CONTACT</ScrollLink>
         </header>
-    )
+    );
 }
 
 function Header() {
@@ -54,12 +87,22 @@ function Header() {
         <header className="header">
             <img className="logo" src={logo} alt="logo"/>
             <NavMenu/>
-            <BlackButton value="RESERVATION  ———"/>
+            <BlackButton value="RESERVATION  ———" destination="/reserve"/>
         </header>
     )
 }
 
 function MainContent() {
+    useEffect(() => {
+        const targetId = sessionStorage.getItem('scrollTarget');
+        if (targetId) {
+            const el = document.getElementById(targetId);
+            if (el) {
+                el.scrollIntoView({behavior: 'smooth'});
+            }
+            sessionStorage.removeItem('scrollTarget');
+        }
+    }, []);
     return (
         <div className="main-content">
             <Title

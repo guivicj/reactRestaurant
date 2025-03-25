@@ -1,69 +1,11 @@
-import { useState } from "react";
-import dragonsushi from '../assets/dragon-sushi.png';
-import creamysushi from '../assets/creamy-sushi.png';
-import rowsalmonsushi from '../assets/roll-salmon-sushi.png';
-
-const menuData = {
-    specialities: [
-        {
-            name: "Dragon Sushi",
-            image: dragonsushi,
-            price: "$50",
-            description: "Ingredients: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut imperdiet lectus. Donec vitae vulputate nunc, in laoreet urna."
-        },
-        {
-            name: "Creamy Sushi",
-            image: creamysushi,
-            price: "$50",
-            description: "Ingredients: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut imperdiet lectus. Donec vitae vulputate nunc, in laoreet urna."
-        },
-        {
-            name: "Roll Salmon Sushi",
-            image: rowsalmonsushi,
-            price: "$50",
-            description: "Ingredients: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut imperdiet lectus. Donec vitae vulputate nunc, in laoreet urna."
-        }
-    ],
-    homestyle: [
-        {
-            name: "Home Sushi",
-            image: "home-sushi.png",
-            price: "$40",
-            description: "Ingredients: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut imperdiet lectus. Donec vitae vulputate nunc, in laoreet urna."
-        },
-        {
-            name: "Rice Sushi",
-            image: "rice-sushi.png",
-            price: "$45",
-            description: "Ingredients: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut imperdiet lectus. Donec vitae vulputate nunc, in laoreet urna."
-        }
-    ],
-    steak: [
-        {
-            name: "Steak Sushi",
-            image: "steak-sushi.png",
-            price: "$55",
-            description: "Ingredients: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut imperdiet lectus. Donec vitae vulputate nunc, in laoreet urna."
-        }
-    ],
-    rice: [
-        {
-            name: "Rice Sushi",
-            image: "rice-sushi.png",
-            price: "$55",
-            description: "Ingredients: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut imperdiet lectus. Donec vitae vulputate nunc, in laoreet urna."
-        },
-        {
-            name: "Steak & Rice Sushi",
-            image: "steak-rice-sushi",
-            price: "$55",
-            description: "Ingredients: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut imperdiet lectus. Donec vitae vulputate nunc, in laoreet urna."
-        }
-    ]
-};
+import {useContext, useState} from "react";
+import menuData from "../data/menuData";
+import {CartContext} from "../contexts/CartContext";
 
 export default function RestaurantMenu() {
     const [selectedCategory, setSelectedCategory] = useState("specialities");
+    const {addToCart} = useContext(CartContext);
+
 
     return (
         <div className="menu-container">
@@ -82,11 +24,12 @@ export default function RestaurantMenu() {
             <div className="menu-content">
                 {menuData[selectedCategory].map((item, index) => (
                     <div key={index} className={`menu-item ${index % 2 === 0 ? "left" : "right"}`}>
-                        <img src={item.image} alt={item.name} />
+                        <img src={item.image} alt={item.name}/>
                         <div className="menu-info">
                             <h3>{item.name}</h3>
                             <p>{item.description}</p>
-                            <span className="menu-price">{item.price}</span>
+                            <p className="menu-price">{item.price}$</p>
+                            <button onClick={() => addToCart(item)} className={"yellow-btn"}>Add to Cart</button>
                         </div>
                     </div>
                 ))}
