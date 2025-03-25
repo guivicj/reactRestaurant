@@ -29,7 +29,7 @@ export default function RestaurantMenu() {
                             <h3>{item.name}</h3>
                             <p>{item.description}</p>
                             <p className="menu-price">{item.price}$</p>
-                            <button onClick={() => addToCart(item)} className={"yellow-btn"}>Add to Cart</button>
+                            <button onClick={() => addToCart(item)} className={"yellow-btn"}>ADD TO CART ———</button>
                         </div>
                     </div>
                 ))}

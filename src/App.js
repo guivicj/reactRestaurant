@@ -20,22 +20,26 @@ import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {useContext, useEffect} from "react";
 import ScrollLink from "./components/ScrollLink";
 import {CartContext} from "./contexts/CartContext";
+import Cart from "./pages/Cart";
 
 function App() {
     const {cart} = useContext(CartContext)
     const navigate = useNavigate()
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
 
     return (
         <div className="container">
             <Background/>
             <Header/>
             <div className="floating-cart" onClick={() => navigate("/cart")}>
-                🛒 {cart.length}
+                🛒 {totalItems}
             </div>
             <Spacer size={128}/>
             <Routes>
                 <Route path="/" element={<MainContent/>}/>
                 <Route path="/reserve" element={<Reservation/>}/>
+                <Route path="/cart" element={<Cart/>}/>
             </Routes>
         </div>
     );
@@ -247,7 +251,6 @@ function FooterContent() {
                     +0721 471 285</p>
             </div>
             <Spacer size={64}/>
-            <YellowButton value="RESERVE A TABLE"/>
             <Spacer size={256}/>
             <div className="socials-container">
                 <img className="logo" src={logo} alt="logo"/>
