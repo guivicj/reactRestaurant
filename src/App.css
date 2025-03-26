@@ -566,3 +566,14 @@ select.field {
     color: #f5bd33;
     margin-top: 2rem;
 }
+
+.cart-message {
+    position: fixed;
+    bottom: 20px;
+    background-color: #f5bd33;
+    color: #1e1e1e;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 20px;
+}
