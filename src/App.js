@@ -56,26 +56,6 @@ function Background() {
 }
 
 function NavMenu() {
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    const handleNav = (targetId) => {
-        if (location.pathname === '/reserve') {
-            const confirmExit = window.confirm("Do you really want to exit? Unsaved changes will be lost.");
-            if (!confirmExit) return;
-        }
-
-        if (location.pathname === '/') {
-            const el = document.getElementById(targetId);
-            if (el) {
-                el.scrollIntoView({behavior: 'smooth'});
-            }
-        } else {
-            sessionStorage.setItem('scrollTarget', targetId);
-            navigate('/');
-        }
-    };
-
     return (
         <header className="top-nav-menu">
             <ScrollLink className="links" targetId="menu" confirmOnExit>MENU</ScrollLink>

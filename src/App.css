@@ -126,7 +126,7 @@ body {
     box-shadow: 0 0 8px #f5bd33;
 
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 25px;
     cursor: pointer;
 }
 
@@ -558,7 +558,6 @@ select.field {
 .cart-actions {
     display: flex;
     gap: 20px;
-    margin-top: 2rem;
     justify-content: center;
 }
 
