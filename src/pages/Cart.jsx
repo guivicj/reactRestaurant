@@ -18,7 +18,7 @@ function Cart() {
 
     return (
         <div className="cart-page">
-            <h2 className="title">YOUR CART️</h2>
+            <h2 className="main-title">YOUR CART️</h2>
 
             {message && <p className="cart-message">{message}</p>}
 

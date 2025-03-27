@@ -21,7 +21,6 @@ export default function ScrollLink({ targetId, children, confirmOnExit = false, 
             const confirmed = window.confirm("Do you really want to exit? Unsaved changes will be lost.");
             if (!confirmed) return;
         }
-
         goToTarget();
     };
 

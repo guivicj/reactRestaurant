@@ -16,11 +16,13 @@ import FoodCard from "./components/FoodCard";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Title from "./components/Title";
 import EventsMenu from "./components/EventsMenu";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import {useContext, useEffect} from "react";
 import ScrollLink from "./components/ScrollLink";
 import {CartContext} from "./contexts/CartContext";
+import {useAuth} from "./contexts/AuthContext";
 import Cart from "./pages/Cart";
+import Login from "./pages/Login";
 
 function App() {
     const {cart} = useContext(CartContext)
@@ -40,6 +42,7 @@ function App() {
                 <Route path="/" element={<MainContent/>}/>
                 <Route path="/reserve" element={<Reservation/>}/>
                 <Route path="/cart" element={<Cart/>}/>
+                <Route path="/login" element={<Login/>}/>
             </Routes>
         </div>
     );
@@ -67,10 +70,16 @@ function NavMenu() {
 }
 
 function Header() {
+    const {user} = useAuth()
+    const navigate = useNavigate()
+
     return (
         <header className="header">
             <img className="logo" src={logo} alt="logo"/>
             <NavMenu/>
+            <button className="yellow-btn log-in-btn"
+                    onClick={() => navigate(user ? "/profile" : "/login")}>
+                {user ? user.name : "SIGN IN ———"}</button>
             <BlackButton value="RESERVATION  ———" destination="/reserve"/>
         </header>
     )

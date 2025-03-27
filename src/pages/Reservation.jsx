@@ -4,7 +4,7 @@ import {useState} from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import YellowButton from "../components/YellowButton";
-import {useNavigate} from "react-router-dom";
+import Field from "../components/Field";
 
 
 export default function Reservation() {
@@ -84,11 +84,5 @@ export default function Reservation() {
                     ))}
                 </select>
         );
-    }
-
-    function Field({type, placeholder}) {
-        return (
-            <input type={type} placeholder={placeholder} className="field"/>
-        )
     }
 }
